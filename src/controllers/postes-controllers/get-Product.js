@@ -1,10 +1,12 @@
-const post_model=require("../../model/postes-model/post-model");
-const comment=require("../../model/postes-model/post_comment");
-const image =require("../../model/postes-model/post_Images")
+const Post_Model=require("../../model/postes-model/post-model");
+const Image_Model=require("../../model/postes-model/post_Images");
+const Comment_Model=require("../../model/postes-model/post_comment");
+
 module.exports=async(req,res)=>{
-    const dataxx=await post_model.findOne({
-        include:{model:comment,model:image},
-        where:{id:req.params.data}    
+    const datause=await Post_Model.findAll({
+        where:{id:req.params.data},
+        include:[{model:Image_Model},{model:Comment_Model}]
+        
     })
-    res.json(dataxx)
+    res.json(datause)
 }
