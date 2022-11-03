@@ -5,7 +5,8 @@ const base64 = require('base-64');
 const reguster_model=require("../../model/reguster_model/reguster_model")
 const bcrypt = require('bcrypt');
 
-//implimentation
+
+
 module.exports=async (req,res,next)=>{
     //----------------------------------DECODED THE CODE ---------------------------------------------//
 
@@ -15,8 +16,7 @@ module.exports=async (req,res,next)=>{
         let basicHeaderParts = req.body.headers.authorization.split(' ');  // ['Basic', 'KDHKJAHKJDSHJKASHJK']
         let encodedString = basicHeaderParts.pop();  // KDHKJAHKJDSHJKASHJK
         let decodedString = base64.decode(encodedString); // "USERNAME:PASSWORD"
-        let [email,password]=decodedString.split(":")
-
+        let [email,password]=decodedString.split(":");
 
 
         try{
@@ -25,13 +25,14 @@ module.exports=async (req,res,next)=>{
 
             //CHECK IF PASSWORD FROM HEADER MATCH WITH  PASSWORD FROM DATABASE
             const valid = await bcrypt.compare(password, user.password);
-            
+
+            //Check If The userName And Password Correct put The User Information In Request  and Comblite To Next Middelware
             if(valid){
-            //Passing The Information In Request Object
-            req.basicAuth=user
-            next()
-            }
-            else{res.json({accessToken:"Error Email Or Password"})
+                //Passing The Information In Request Object
+                req.basicAuth=user
+                next()
+            }else{
+                res.json({accessToken:"Error Email Or Password"})
             }
         }
         catch (error) { 

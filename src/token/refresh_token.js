@@ -16,5 +16,5 @@ module.exports= createRefreshToken =(user)=> jwt.sign({
     process.env.REFRESH_TOKEN_SECRET ,
 
     //the token will expire after these time
-    {expiresIn:"7d"}
+    {expiresIn:"365d"}
     );

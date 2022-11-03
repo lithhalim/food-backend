@@ -4,33 +4,27 @@ const bcrypt = require('bcrypt');
 const reguster_model=require("../../../model/reguster_model/reguster_model")
 
 module.exports=async(req,res,next)=>{
-    //The All Data Come From Clinet
-    const{fullName,password,uploadImage,email,gender,phoneNumber,regusterid,role,verification}=req.body.alldata;
+    //Get the Pawword To Hshed And Email To Search If Email Already Reguster
+    const{password,email}=req.body;
+    
 
     try{
 
-        //Hashing The Password Using Bycrit
+        //Hashing Password Befor Insert Database
         let hashPassword=await bcrypt.hash(password,10);
 
-        //Check In Database If Any User Have Same Email 
+        //Add New Hashing Password To Data
+        req.body.password=hashPassword;
+
+        //Check Database If Any User Have Same Email
         let user=await reguster_model.findOne({where:{email:email}});
         
         //If Email Is Taken Response Erorr
         if(user){res.json({status:"Email Is Taken"});}
+
         //If Email Not Token Creat New User
             if(!user){
-                let newRecord=await reguster_model.create({
-                fullName:fullName,
-                password:hashPassword,
-                image:uploadImage,
-                email:email,
-                gender:gender,
-                regusterid:regusterid,
-                phoneNumber:phoneNumber,
-                role:role,
-                verification:verification
-               });
-
+                await reguster_model.create(req.body);
                //The Email Hase Been Reguster
                 res.json({status:"Email Is ok"});
                 res.status(201)

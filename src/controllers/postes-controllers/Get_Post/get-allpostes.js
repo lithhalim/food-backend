@@ -1,6 +1,6 @@
-const postes_model=require("../../model/postes-model/post-model");
-const comment_model=require("../../model/postes-model/post_comment");
-const Image_model=require("../../model/postes-model/post_Images");
+const postes_model=require("../../../model/postes-model/post-model");
+const comment_model=require("../../../model/postes-model/post_comment");
+const Image_model=require("../../../model/postes-model/post_Images");
 
 module.exports=async(req,res)=>{
     const data=await postes_model.findAll({

@@ -1,5 +1,5 @@
-const post_model=require("../../model/postes-model/post-model");
-const imageModel=require("../../model/postes-model/post_Images");
+const post_model=require("../../../model/postes-model/post-model");
+const imageModel=require("../../../model/postes-model/post_Images");
 
 module.exports=async(req,res)=>{
     if(req.params.data=="all"){
