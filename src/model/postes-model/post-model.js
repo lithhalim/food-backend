@@ -5,7 +5,7 @@ const database=require("../../database/database")
 
 const  postes_model=database.define("posts",{
     Price:{
-      type:INTEGER
+      type:TEXT
     },
     calories:{
         type:TEXT,
@@ -29,8 +29,7 @@ const  postes_model=database.define("posts",{
       type:TEXT,
     },
     quantity:{
-      type:INTEGER,
-      defaultValue:1
+      type:TEXT,
     }
 })
 

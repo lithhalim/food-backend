@@ -51,8 +51,12 @@ app.use(authntication_routes)
 const Postes_routes=require("../routes/postes_routes/postes_routes");
 app.use(Postes_routes)
 
-const Other_routes=require("../routes/Other_routes/search-post");
-app.use(Other_routes)
+const Search_routes=require("../routes/Other_routes/search-post");
+app.use(Search_routes)
+
+const Basket_routes=require("../routes/Other_routes/Basket-section");
+app.use(Basket_routes)
+
 
 
 
