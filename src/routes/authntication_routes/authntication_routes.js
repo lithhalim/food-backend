@@ -3,7 +3,8 @@ const router = express.Router()
 
 //BASIQ AUTH REQUIRE
 const basic_auth=require("../../middelware/authintication/basic_auth")
-const bearer_auth=require("../../middelware/authintication/barear_auth")
+const bearer_auth=require("../../middelware/authintication/barear_auth");
+
 
 
 
@@ -38,7 +39,7 @@ router.post("/updatePass",UpdatePassword)
 
 //---------------------------------- Get All Reguster User ----------------------------------------------//
 const Get_User_Data=require("../../controllers/authntication-controllers/get_reguster_data");
-router.get("/getDataReguster/:data",Get_User_Data)
+router.get("/getDataReguster/:data",bearer_auth,Get_User_Data)
 
 
 module.exports=router
