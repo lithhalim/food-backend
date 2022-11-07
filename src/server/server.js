@@ -13,7 +13,21 @@ require("dotenv").config();
 
 
 
-//require soket io section 
+
+//-------------------------------------Graph ql Import -----------------------------------------------//
+var  {graphqlHTTP}  = require('express-graphql');
+
+const schema=require("./schema/schema");
+
+ 
+// bind express with graphql
+app.use('/graphql', graphqlHTTP({
+  schema,graphiql:true
+}));
+
+
+//--------------------------------------------socket io section ----------------------------------------//
+
 const {Server} =require("socket.io")
 
 const server = http.createServer(app);
